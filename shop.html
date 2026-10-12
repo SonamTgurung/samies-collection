@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop | Samie's Collection</title>
+  <meta name="description" content="Shop modern and traditional women's wear at Samie's Collection: dresses, kurtas, sarees, lehengas and more.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="shop">
+  <header id="site-header"></header>
+
+  <main class="container">
+    <div class="page-head">
+      <p class="eyebrow">The Shop</p>
+      <h1 id="shop-title">All Collections</h1>
+    </div>
+
+    <div class="filters">
+      <div class="filter-groups">
+        <div class="chips" data-filter="style">
+          <button type="button" data-value="All">All</button>
+          <button type="button" data-value="Modern">Modern</button>
+          <button type="button" data-value="Traditional">Traditional</button>
+        </div>
+        <div class="chips" data-filter="occasion">
+          <button type="button" data-value="All">Any Occasion</button>
+          <button type="button" data-value="Casual">Casual</button>
+          <button type="button" data-value="Fancy">Fancy</button>
+        </div>
+      </div>
+      <div class="selects">
+        <select id="f-category" aria-label="Category"></select>
+        <select id="f-sort" aria-label="Sort">
+          <option value="featured">Featured</option>
+          <option value="new">New first</option>
+          <option value="low">Price: low to high</option>
+          <option value="high">Price: high to low</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="shop-meta"><p class="eyebrow" id="shop-count"></p></div>
+    <div class="grid" id="shop-grid"></div>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="js/store-data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

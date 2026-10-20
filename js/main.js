@@ -1,6 +1,6 @@
 /* Shared site logic: header, footer, product cards, page setup. */
 
-const formatPrice = (n) => `${STORE.currency} ${n.toLocaleString("en-IN")}`;
+const formatPrice = (n) => (n == null ? "Price on request" : `${STORE.currency} ${n.toLocaleString("en-IN")}`);
 const waLink = (text) =>
   `https://wa.me/${STORE.whatsapp}` + (text ? `?text=${encodeURIComponent(text)}` : "");
 const esc = (s) =>
@@ -196,8 +196,8 @@ function initShop() {
         (state.occasion === "All" || p.occasion === state.occasion) &&
         (state.category === "All" || p.category === state.category)
     );
-    if (state.sort === "low") list = [...list].sort((a, b) => a.price - b.price);
-    if (state.sort === "high") list = [...list].sort((a, b) => b.price - a.price);
+    if (state.sort === "low") list = [...list].sort((a, b) => (a.price ?? Infinity) - (b.price ?? Infinity));
+    if (state.sort === "high") list = [...list].sort((a, b) => (b.price ?? -Infinity) - (a.price ?? -Infinity));
     if (state.sort === "new") list = [...list].sort((a, b) => b.isNew - a.isNew);
 
     document.getElementById("shop-grid").innerHTML = list.length
@@ -239,9 +239,9 @@ function initProduct() {
   document.title = `${p.name} | ${STORE.name}`;
 
   const images = p.images.length ? p.images : [null];
-  const sel = { size: p.sizes.length === 1 ? p.sizes[0] : null, color: p.colors.length === 1 ? p.colors[0] : null };
+  const sel = { size: p.sizes.length === 1 ? p.sizes[0] : p.sizes.length ? null : "To confirm on WhatsApp", color: p.colors.length === 1 ? p.colors[0] : null };
 
-  const options = (key, label, values) => `
+  const options = (key, label, values) => !values.length ? "" : `
     <div class="option">
       <p class="option-label">${label}: <span id="${key}-chosen">${sel[key] ? esc(sel[key]) : "Select"}</span></p>
       <div class="pills" data-option="${key}">
@@ -263,7 +263,7 @@ function initProduct() {
         <p class="description">${esc(p.description)}</p>
         ${options("size", "Size", p.sizes)}
         ${options("color", "Colour", p.colors)}
-        <p class="form-hint" id="order-hint" hidden>Please choose a size and colour first.</p>
+        <p class="form-hint" id="order-hint" hidden>Please choose ${p.sizes.length > 1 ? "a size and " : ""}a colour first.</p>
         <a class="btn btn-wa" id="order-btn" href="#" target="_blank" rel="noopener">${ICONS.whatsapp} Order on WhatsApp</a>
         <a class="btn btn-outline" href="${esc(STORE.instagram)}" target="_blank" rel="noopener">${ICONS.instagram} Message us on Instagram</a>
         <ul class="perks">

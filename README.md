@@ -23,10 +23,24 @@ Instagram, TikTok, address, map search and opening hours.
 The WhatsApp number must start with the country code and have no `+` or spaces,
 e.g. `9779812345678`.
 
-## 2. Add the logo
+## 2. Logo files
 
-Save the logo as `images/logo.png`. It will replace the text logo automatically.
-A transparent background looks best.
+All logo files are in `images/brand/`. SVG files stay sharp at any size and are
+best for printing. PNG files work everywhere.
+
+| File | Use it for |
+|---|---|
+| `logo-stacked.png` / `.svg` | Main logo: shop sign, bags, tags, posters |
+| `logo-horizontal.png` / `.svg` | Wide spaces: website header, banners, letterheads |
+| `...-white` versions | On rosewood or dark backgrounds, or over photos |
+| `profile-picture.png` | Instagram, TikTok, Facebook, WhatsApp Business profile photo |
+| `profile-picture-dark.png` | Alternative rosewood profile photo |
+| `favicon.svg`, `favicon-48.png`, `apple-touch-icon.png` | Browser tab and phone home-screen icon (already set up) |
+
+Brand colours (Rosewood & Gold): rosewood `#8E3B4A`, deep cocoa `#3A2328`, ivory `#FCF8F5`,
+accents `#F2C9C4` (blush) `#E3A3A0` (rose) `#C98A8E` (mauve) `#C9A46A` (gold) `#E9D3B0` (champagne).
+Website colours are set at the top of `css/style.css`.
+Fonts: Cormorant Garamond (logo and headings) and Jost (small text). Both are free Google Fonts.
 
 ## 3. Add photos
 

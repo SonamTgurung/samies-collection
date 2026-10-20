@@ -17,14 +17,15 @@ const ICONS = {
 
 /* ---------- Image placeholders ---------- */
 const TONES = [
-  ["#F1E6DC", "#E2CFC0"],
-  ["#EFE7E3", "#DCC8C2"],
-  ["#EDE8E0", "#D8CEBF"],
-  ["#F3E9E6", "#E4CDC8"],
-  ["#ECE6DD", "#D6CABB"],
+  ["#FCF0EE", "#F7DEDB"], // blush
+  ["#F8E8E7", "#F1D1D0"], // rose
+  ["#F4E7E8", "#E9CFD1"], // mauve
+  ["#F7EFE3", "#EEDDC2"], // gold
+  ["#FBF5EC", "#F4E9D8"], // champagne
 ];
 
 function toneFor(id) {
+  if (/^\d+$/.test(id)) return TONES[Number(id) % TONES.length]; // fixed tone by number
   let h = 0;
   for (const c of id) h = (h * 31 + c.charCodeAt(0)) >>> 0;
   return TONES[h % TONES.length];
@@ -97,7 +98,7 @@ function renderHeader() {
     <div class="announce">Order easily on WhatsApp · Visit our new store in Kathmandu</div>
     <div class="container header-inner">
       <a class="logo" href="index.html" aria-label="${esc(STORE.name)} home">
-        <img src="images/logo.png" alt="${esc(STORE.name)}" onload="this.parentElement.classList.add('has-img')" onerror="this.remove()">
+        <img src="images/brand/logo-horizontal.svg" alt="${esc(STORE.name)}" onload="this.parentElement.classList.add('has-img')" onerror="this.remove()">
         <span class="logo-text">Samie's <em>Collection</em></span>
       </a>
       <nav class="nav" id="nav">
@@ -118,7 +119,7 @@ function renderFooter() {
   el.innerHTML = `
     <div class="container footer-grid">
       <div>
-        <p class="logo-text footer-logo">Samie's <em>Collection</em></p>
+        <img class="footer-logo-img" src="images/brand/logo-stacked.svg" alt="${esc(STORE.name)}">
         <p class="muted">${esc(STORE.tagline)}. Modern and traditional wear for women, casual to celebration.</p>
         <div class="social">${socialLinks()}</div>
       </div>
@@ -176,7 +177,7 @@ function initShop() {
 
   const categories = ["All", ...new Set(PRODUCTS.map((p) => p.category))];
   const catSelect = document.getElementById("f-category");
-  catSelect.innerHTML = categories.map((c) => `<option>${esc(c)}</option>`).join("");
+  catSelect.innerHTML = categories.map((c) => `<option value="${esc(c)}">${c === "All" ? "All categories" : esc(c)}</option>`).join("");
 
   function syncControls() {
     document.querySelectorAll(".chips").forEach((group) => {
